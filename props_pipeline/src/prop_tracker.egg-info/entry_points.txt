@@ -1,0 +1,2 @@
+[console_scripts]
+prop-tracker = prop_tracker.cli:main

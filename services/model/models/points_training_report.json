@@ -1,0 +1,10 @@
+{
+  "model_path": "C:\\Users\\baner\\quantpicks-ai\\services\\model\\models\\points_model_v2.joblib",
+  "rows": 35695,
+  "val_mae": 4.885485969628144,
+  "val_rmse": 6.3211027895181795,
+  "val_r2": 0.5163123785421325,
+  "global_std": 6.321095595929172,
+  "player_std_entries": 393,
+  "note": "This model predicts points mean + uncertainty. Betting-line calibration requires historical lines (not included in points_training.parquet)."
+}

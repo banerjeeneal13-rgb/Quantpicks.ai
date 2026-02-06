@@ -1,0 +1,2 @@
+{"season": "2025-26", "season_type": "Regular Season", "error": "Request failed for https://stats.nba.com/stats/leaguegamelog: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=30.0)"}
+{"season": "2025-26", "season_type": "Regular Season", "error": "Request failed for https://stats.nba.com/stats/leaguegamelog: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=60.0)"}

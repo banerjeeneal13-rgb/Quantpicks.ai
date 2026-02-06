@@ -1,0 +1,23 @@
+{
+  "resultSets": [
+    {
+      "name": "PlayerStats",
+      "headers": [
+        "GAME_ID",
+        "PLAYER_ID",
+        "TEAM_ID",
+        "TS_PCT",
+        "EFG_PCT",
+        "USG_PCT",
+        "AST_PCT",
+        "TOV_PCT",
+        "REB_PCT",
+        "POSS",
+        "PACE"
+      ],
+      "rowSet": [
+        ["0022400002", "2544", "1610612747", 0.61, 0.55, 0.28, 0.34, 0.12, 0.10, 80.2, 98.5]
+      ]
+    }
+  ]
+}

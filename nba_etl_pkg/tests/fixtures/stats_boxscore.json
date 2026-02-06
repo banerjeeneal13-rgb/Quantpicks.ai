@@ -1,0 +1,72 @@
+{
+  "resultSets": [
+    {
+      "name": "GameSummary",
+      "headers": [
+        "GAME_ID",
+        "GAME_DATE_EST",
+        "HOME_TEAM_ID",
+        "VISITOR_TEAM_ID",
+        "HOME_TEAM_SCORE",
+        "VISITOR_TEAM_SCORE"
+      ],
+      "rowSet": [
+        ["0022400002", "2024-12-02T00:00:00Z", "1610612747", "1610612745", 99, 101]
+      ]
+    },
+    {
+      "name": "TeamStats",
+      "headers": [
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "MIN",
+        "PTS",
+        "REB",
+        "AST",
+        "STL",
+        "BLK",
+        "TO",
+        "FGA",
+        "FGM",
+        "FG3A",
+        "FG3M",
+        "FTA",
+        "FTM",
+        "PLUS_MINUS"
+      ],
+      "rowSet": [
+        ["1610612747", "LAL", "240", 99, 41, 22, 7, 5, 13, 84, 38, 24, 9, 18, 14, -2],
+        ["1610612745", "HOU", "240", 101, 44, 21, 6, 4, 12, 80, 39, 26, 10, 20, 13, 2]
+      ]
+    },
+    {
+      "name": "PlayerStats",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "MIN",
+        "PTS",
+        "REB",
+        "AST",
+        "STL",
+        "BLK",
+        "TO",
+        "FGA",
+        "FGM",
+        "FG3A",
+        "FG3M",
+        "FTA",
+        "FTM",
+        "PLUS_MINUS",
+        "START_POSITION"
+      ],
+      "rowSet": [
+        ["0022400002", "1610612747", "LAL", "2544", "LeBron James", "34", 26, 8, 7, 1, 1, 3, 19, 10, 6, 2, 6, 4, 5, "F"],
+        ["0022400002", "1610612745", "HOU", "201935", "James Harden", "36", 29, 6, 8, 2, 0, 4, 18, 9, 8, 3, 10, 8, -1, "G"]
+      ]
+    }
+  ]
+}

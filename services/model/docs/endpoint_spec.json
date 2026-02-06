@@ -1,0 +1,39 @@
+{
+  "shot_zone": {
+    "entity": {
+      "player": {
+        "endpoint": "leaguedashplayerptshot",
+        "notes": "NBA.com Stats shot dashboard player endpoint."
+      },
+      "team": {
+        "endpoint": "leaguedashteamshotlocations",
+        "notes": "NBA.com Stats shot dashboard team endpoint."
+      }
+    },
+    "required_params": [
+      "Season",
+      "SeasonType",
+      "PerMode",
+      "LeagueID"
+    ],
+    "optional_params": [
+      "MeasureType",
+      "PlusMinus",
+      "PaceAdjust",
+      "Rank",
+      "Outcome",
+      "Location",
+      "Month",
+      "SeasonSegment",
+      "DateFrom",
+      "DateTo",
+      "OpponentTeamID",
+      "VsConference",
+      "VsDivision",
+      "GameSegment",
+      "Period",
+      "ShotClockRange",
+      "LastNGames"
+    ]
+  }
+}

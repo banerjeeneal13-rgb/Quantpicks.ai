@@ -1,0 +1,16 @@
+{
+  "model_path": "C:\\Users\\baner\\quantpicks-ai\\services\\model\\models\\points_model_v4.joblib",
+  "train_rows": 9651,
+  "val_mae": 4.68032053022841,
+  "val_rmse": 6.051176537918921,
+  "val_r2": 0.06337675934344644,
+  "global_std": 6.048128250258787,
+  "std_multiplier": 1.2,
+  "p_clip": [
+    0.03,
+    0.97
+  ],
+  "player_std_entries": 0,
+  "calibration_line_proxy": 10.0,
+  "calibration_source": "median_proxy"
+}

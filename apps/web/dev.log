@@ -1,0 +1,64 @@
+
+> web@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.56.1:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 890ms
+ GET /dashboard/props 200 in 956ms (compile: 795ms, render: 161ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 1449ms (compile: 88ms, render: 1362ms)
+ GET /api/edge-info?id=107802 200 in 2.8s (compile: 135ms, render: 2.6s)
+ GET /api/edge-info?id=111879 200 in 1208ms (compile: 2ms, render: 1205ms)
+ GET /api/edge-info?id=107802 200 in 1444ms (compile: 2ms, render: 1441ms)
+ GET /api/latest-stats 200 in 523ms (compile: 185ms, render: 338ms)
+ GET /dashboard/props 200 in 59ms (compile: 5ms, render: 55ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 1323ms (compile: 1646µs, render: 1321ms)
+ GET /api/edge-info?id=107800 200 in 1747ms (compile: 55ms, render: 1692ms)
+ GET /api/top-edges?market=player_points&page=2&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 1026ms (compile: 4ms, render: 1022ms)
+ GET /api/top-edges?market=player_points&page=3&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 1015ms (compile: 2ms, render: 1013ms)
+ GET /api/top-edges?market=player_points&page=3&pageSize=10&sort=ev&dir=desc&q=j&onlyPos=0 200 in 763ms (compile: 1996µs, render: 761ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&q=ja&onlyPos=0 200 in 767ms (compile: 1857µs, render: 765ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&q=j&onlyPos=0 200 in 1428ms (compile: 1639µs, render: 1427ms)
+ GET /api/edge-info?id=104524 200 in 1852ms (compile: 4ms, render: 1848ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&q=j&onlyPos=0 200 in 859ms (compile: 4ms, render: 855ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 1056ms (compile: 2ms, render: 1054ms)
+ GET /api/edge-info?id=106289 200 in 1469ms (compile: 1750µs, render: 1468ms)
+ GET /api/top-edges?market=player_points&page=2&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 2.7s (compile: 3ms, render: 2.7s)
+ GET /api/edge-info?id=109141 200 in 3.8s (compile: 1861µs, render: 3.8s)
+ GET /api/top-edges?market=player_points&page=3&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 2.9s (compile: 3ms, render: 2.9s)
+ GET /api/edge-info?id=111231 200 in 3.0s (compile: 1796µs, render: 3.0s)
+ GET /api/edge-info?id=111231 200 in 4.2s (compile: 1582µs, render: 4.2s)
+ GET /api/edge-info?id=111231 200 in 1555ms (compile: 6ms, render: 1549ms)
+ GET /dashboard/props 200 in 85ms (compile: 8ms, render: 77ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 6.1s (compile: 6ms, render: 6.1s)
+ GET /api/edge-info?id=86843 200 in 3.9s (compile: 3ms, render: 3.9s)
+ GET /api/edge-info?id=86843 200 in 1685ms (compile: 2ms, render: 1683ms)
+ GET /api/edge-info?id=83337 200 in 4.4s (compile: 3ms, render: 4.4s)
+ GET /api/edge-info?id=83337 200 in 2.7s (compile: 2ms, render: 2.7s)
+ GET /dashboard/props 200 in 69ms (compile: 6ms, render: 63ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 4.5s (compile: 1911µs, render: 4.5s)
+ GET /api/edge-info?id=83473 200 in 4.8s (compile: 1955µs, render: 4.8s)
+ GET /api/edge-info?id=83473 200 in 2.5s (compile: 2ms, render: 2.5s)
+ GET /api/edge-info?id=83337 200 in 32.6s (compile: 132ms, render: 32.4s)
+ GET /api/edge-info?id=83337 200 in 30.9s (compile: 2ms, render: 30.9s)
+ GET /api/edge-info?id=83337 200 in 29.7s (compile: 2ms, render: 29.7s)
+ GET /api/edge-info?id=83337 200 in 27.5s (compile: 1716µs, render: 27.5s)
+ GET /api/edge-info?id=83337 200 in 29.6s (compile: 1983µs, render: 29.6s)
+ GET /api/edge-info?id=83337 200 in 29.4s (compile: 1994µs, render: 29.4s)
+ GET /api/edge-info?id=83337 200 in 29.6s (compile: 3ms, render: 29.6s)
+ GET /api/edge-info?id=83337 200 in 29.5s (compile: 2ms, render: 29.5s)
+ GET /api/edge-info?id=83337 200 in 26.7s (compile: 2ms, render: 26.7s)
+ GET /api/edge-info?id=83337 200 in 29.4s (compile: 1941µs, render: 29.4s)
+ GET /api/edge-info?id=83337 200 in 27.5s (compile: 2ms, render: 27.5s)
+ GET /dashboard/props 200 in 72ms (compile: 6ms, render: 66ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 1410ms (compile: 1457µs, render: 1409ms)
+ GET /api/edge-info?id=121151 200 in 6.1s (compile: 2ms, render: 6.1s)
+✓ Compiled in 143ms
+ GET /dashboard/props 200 in 266ms (compile: 97ms, render: 169ms)
+ GET /api/top-edges?market=player_points&page=1&pageSize=10&sort=ev&dir=desc&onlyPos=0 200 in 3.5s (compile: 3ms, render: 3.5s)
+ GET /api/edge-info?id=121151 200 in 3.8s (compile: 102ms, render: 3.6s)
+[?25h

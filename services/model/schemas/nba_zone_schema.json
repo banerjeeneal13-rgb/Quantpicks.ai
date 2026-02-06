@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NBA Zone Stats Response",
+  "type": "object",
+  "required": ["metadata", "tables"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Request parameters echoed back from the endpoint."
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "columns", "rows"],
+        "properties": {
+          "name": { "type": "string" },
+          "columns": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

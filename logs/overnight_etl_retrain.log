@@ -1,0 +1,597 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260128140827
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 5012
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+PS>TerminatingError(): "Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:46 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~."
+>> TerminatingError(): "Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:46 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~."
+Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:46 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+Program 'python.exe' failed to run: Access is deniedAt
+C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:46 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+At C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:46 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NativeCommandFailed
+
+**********************
+Windows PowerShell transcript end
+End time: 20260128140828
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260129023002
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 34356
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-01-29 02:30:06,714 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-01-29 02:32:33,714 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260129023238
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260130023002
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 34080
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-01-30 02:30:04,941 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-01-30 02:33:12,810 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260130023314
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260131232154
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 62312
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-01-31 23:22:17,596 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-01-31 23:22:22,156 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260131232223
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260201023002
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 28160
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-02-01 02:30:03,799 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-02-01 02:33:10,988 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260201023311
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260202023001
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 10060
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-02-02 02:30:09,533 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-02-02 02:31:58,206 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260202023158
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260203023002
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 22232
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-02-03 02:30:09,456 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-02-03 02:33:18,842 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260203023319
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260204023003
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 32136
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-02-04 02:30:05,635 INFO Fetching league gamelog for 2025-26 Regular Season
+2026-02-04 02:33:13,543 WARNING leaguegamelog failed; falling back to CDN schedule for game IDs.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 744, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 740, in main
+    args.func(args)
+    ~~~~~~~~~^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\cli.py", line 660, in cmd_fetch
+    write_parquet(data_dir / "games.parquet", data_dir / "games.csv")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\baner\quantpicks-ai\nba_etl_pkg\nba_etl\storage.py", line 41, in write_parquet
+    df = pd.read_csv(csv_path)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 873, in read_cs
+v
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 306, in _read
+    return parser.read(nrows)
+           ~~~~~~~~~~~^^^^^^^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\readers.py", line 1947, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        nrows
+        ^^^^^
+    )
+    ^
+  File "C:\Users\baner\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\Lo
+calCache\local-packages\Python313\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 215, i
+n read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 832, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 897, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 868, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 885, in pandas._libs.parsers.TextReader._check_tokenize_sta
+tus
+  File "pandas/_libs/parsers.pyx", line 2084, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 10 fields in line 559, saw 11
+**********************
+Windows PowerShell transcript end
+End time: 20260204023314
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260205151912
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 32772
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+PS>TerminatingError(): "Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~."
+>> TerminatingError(): "Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~."
+Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+Program 'python.exe' failed to run: Access is deniedAt
+C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+At C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NativeCommandFailed
+
+**********************
+Windows PowerShell transcript end
+End time: 20260205151912
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260206012955
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command [Console]::OutputEncoding=[System.Text.Encoding]::UTF8;
+$env:ENABLE_NBA_ZONE='1'; $env:ENABLE_NBA_WITH_WITHOUT='1'; .\scripts\overnight_etl_retrain.ps1
+Process ID: 27316
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260206212621
+Username: NEALSLAPTOP\baner
+RunAs User: NEALSLAPTOP\baner
+Configuration Name: 
+Machine: NEALSLAPTOP (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1
+Process ID: 32848
+PSVersion: 5.1.26100.7623
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7623
+BuildVersion: 10.0.26100.7623
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+PS>TerminatingError(): "Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~."
+>> TerminatingError(): "Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~."
+Program 'python.exe' failed to run: Access is deniedAt C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+Program 'python.exe' failed to run: Access is deniedAt
+C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+At C:\Users\baner\quantpicks-ai\scripts\overnight_etl_retrain.ps1:55 char:1
++ & $python -m nba_etl.cli --log-level info fetch `
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : NativeCommandFailed
+
+**********************
+Windows PowerShell transcript end
+End time: 20260206212624
+**********************

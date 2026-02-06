@@ -1,0 +1,17 @@
+seasons:
+  - "2025-26"
+season_type: "Regular Season"
+markets:
+  - player_points
+  - player_rebounds
+  - player_assists
+providers:
+  nba_official: "stats.nba.com via nba_api (must be accessible without bypass)"
+  pbp_derived: "pbpstats (licensed/approved)"
+  injuries_official: "licensed provider or official feed"
+  referees_official: "licensed provider or official feed"
+  odds_provider: "licensed odds API"
+paths:
+  data_dir: "services/model/data"
+  logs_dir: "logs"
+  output_dir: "pipeline/output"

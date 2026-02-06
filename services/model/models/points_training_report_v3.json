@@ -1,0 +1,29 @@
+{
+  "dataset_rows": 19622,
+  "players": 408,
+  "features": [
+    "pts_ma_5",
+    "pts_ma_10",
+    "min_ma_5",
+    "min_ma_10",
+    "fga_ma_5",
+    "fga_ma_10",
+    "is_home",
+    "days_rest",
+    "team_pace",
+    "team_off_rating",
+    "team_def_rating",
+    "opp_pace",
+    "opp_off_rating",
+    "opp_def_rating",
+    "pace_diff",
+    "def_diff"
+  ],
+  "val_mae": 4.842423975500857,
+  "val_rmse": 6.27877307070044,
+  "val_r2": 0.5199019179004958,
+  "global_std": 6.27877307070044,
+  "std_floor": 4.5,
+  "uncertainty_scale": 1.25,
+  "player_std_entries": 384
+}

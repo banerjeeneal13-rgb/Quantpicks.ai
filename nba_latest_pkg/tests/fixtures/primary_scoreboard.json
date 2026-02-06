@@ -1,0 +1,38 @@
+{
+  "scoreboard": {
+    "games": [
+      {
+        "gameId": "0022400001",
+        "gameStatus": 3,
+        "gameStatusText": "Final",
+        "gameTimeUTC": "2024-12-01T01:00:00Z",
+        "homeTeam": {
+          "teamTricode": "LAL",
+          "teamName": "Lakers",
+          "score": 110
+        },
+        "awayTeam": {
+          "teamTricode": "BOS",
+          "teamName": "Celtics",
+          "score": 105
+        }
+      },
+      {
+        "gameId": "0022400002",
+        "gameStatus": 2,
+        "gameStatusText": "Q3 08:22",
+        "gameTimeUTC": "2024-12-01T03:00:00Z",
+        "homeTeam": {
+          "teamTricode": "NYK",
+          "teamName": "Knicks",
+          "score": 70
+        },
+        "awayTeam": {
+          "teamTricode": "MIA",
+          "teamName": "Heat",
+          "score": 68
+        }
+      }
+    ]
+  }
+}

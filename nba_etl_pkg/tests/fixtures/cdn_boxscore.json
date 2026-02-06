@@ -1,0 +1,92 @@
+{
+  "game": {
+    "gameId": "0022400001",
+    "gameStatus": 3,
+    "gameStatusText": "Final",
+    "gameTimeUTC": "2024-12-01T01:00:00Z",
+    "homeTeam": {
+      "teamId": "1610612747",
+      "teamTricode": "LAL",
+      "score": 110,
+      "statistics": {
+        "minutes": "PT240M00.00S",
+        "points": 110,
+        "reboundsTotal": 45,
+        "assists": 24,
+        "steals": 7,
+        "blocks": 5,
+        "turnovers": 12,
+        "fieldGoalsAttempted": 85,
+        "fieldGoalsMade": 40,
+        "threePointersAttempted": 25,
+        "threePointersMade": 10,
+        "freeThrowsAttempted": 20,
+        "freeThrowsMade": 20,
+        "plusMinusPoints": 5
+      },
+      "players": [
+        {
+          "personId": "2544",
+          "name": "LeBron James",
+          "minutes": "PT34M00.00S",
+          "points": 30,
+          "reboundsTotal": 8,
+          "assists": 9,
+          "steals": 1,
+          "blocks": 1,
+          "turnovers": 3,
+          "fieldGoalsAttempted": 22,
+          "fieldGoalsMade": 12,
+          "threePointersAttempted": 6,
+          "threePointersMade": 2,
+          "freeThrowsAttempted": 6,
+          "freeThrowsMade": 4,
+          "plusMinusPoints": 12,
+          "starter": "1"
+        }
+      ]
+    },
+    "awayTeam": {
+      "teamId": "1610612738",
+      "teamTricode": "BOS",
+      "score": 105,
+      "statistics": {
+        "minutes": "PT240M00.00S",
+        "points": 105,
+        "reboundsTotal": 40,
+        "assists": 20,
+        "steals": 6,
+        "blocks": 4,
+        "turnovers": 10,
+        "fieldGoalsAttempted": 82,
+        "fieldGoalsMade": 38,
+        "threePointersAttempted": 28,
+        "threePointersMade": 11,
+        "freeThrowsAttempted": 18,
+        "freeThrowsMade": 18,
+        "plusMinusPoints": -5
+      },
+      "players": [
+        {
+          "personId": "1628369",
+          "name": "Jayson Tatum",
+          "minutes": "PT36M00.00S",
+          "points": 28,
+          "reboundsTotal": 7,
+          "assists": 5,
+          "steals": 2,
+          "blocks": 0,
+          "turnovers": 2,
+          "fieldGoalsAttempted": 20,
+          "fieldGoalsMade": 10,
+          "threePointersAttempted": 7,
+          "threePointersMade": 3,
+          "freeThrowsAttempted": 6,
+          "freeThrowsMade": 5,
+          "plusMinusPoints": -8,
+          "starter": "1"
+        }
+      ]
+    }
+  }
+}

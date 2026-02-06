@@ -1,0 +1,2 @@
+[console_scripts]
+nba_latest = nba_latest.cli:main
