@@ -64,6 +64,6 @@ export function coerceDecimalOdds(row: OddsFields | null | undefined): number | 
 
 export function formatDecimalOdds(row: OddsFields | null | undefined, digits = 2): string {
   const odds = coerceDecimalOdds(row);
-  if (!Number.isFinite(odds)) return "-";
+  if (odds === null || !Number.isFinite(odds)) return "-";
   return odds.toFixed(digits);
 }

@@ -3,6 +3,19 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { coerceDecimalOdds, formatDecimalOdds } from "@/lib/odds";
+import {
+  fetchPlayerHeadshot,
+  teamLogoUrl,
+  nameInitials,
+  isTeamMarket,
+} from "@/lib/nba-images";
+import {
+  kellyStake,
+  formatStake,
+  formatUnits,
+  DEFAULT_STAKE_CONFIG,
+  type StakeConfig,
+} from "@/lib/stake-calculator";
 
 const MARKET_OPTIONS: Record<string, string> = {
   all: "All Markets",
@@ -27,12 +40,9 @@ function marketLabel(market: string) {
   return MARKET_OPTIONS[market] ?? market;
 }
 
-// Confidence proxy that works even if we don't store model mean/std yet.
-// 0.0 = coinflip, 1.0 = extremely confident
 function confidenceFromP(p: number) {
   if (!Number.isFinite(p)) return 0;
-  const c = Math.min(1, Math.max(0, Math.abs(p - 0.5) * 2));
-  return c;
+  return Math.min(1, Math.max(0, Math.abs(p - 0.5) * 2));
 }
 
 function confidenceBadge(p: number) {
@@ -42,9 +52,73 @@ function confidenceBadge(p: number) {
   return { text: "LOW", cls: "bg-black/10 text-black/70" };
 }
 
-// Set NEXT_PUBLIC_PLAN=free or pro in apps/web/.env.local
 const PLAN = (process.env.NEXT_PUBLIC_PLAN || "free").toLowerCase();
 const IS_PRO = PLAN === "pro";
+
+// ── Inline avatar for table rows ─────────────────────────────────────────────
+function RowAvatar({
+  name,
+  market,
+  teamAbbr,
+}: {
+  name: string;
+  market?: string;
+  teamAbbr?: string | null;
+}) {
+  const [imgUrl, setImgUrl] = useState<string | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  const isTeam = isTeamMarket(market || "");
+
+  useEffect(() => {
+    if (isTeam && teamAbbr) {
+      setImgUrl(teamLogoUrl(teamAbbr));
+      return;
+    }
+    let cancelled = false;
+    fetchPlayerHeadshot(name).then((url) => {
+      if (!cancelled) setImgUrl(url);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [name, isTeam, teamAbbr]);
+
+  const SIZE = 32;
+
+  if (imgUrl && !failed) {
+    return (
+      <img
+        src={imgUrl}
+        alt={name}
+        width={SIZE}
+        height={SIZE}
+        className="rounded-full object-cover bg-black/10 shrink-0"
+        style={{ width: SIZE, height: SIZE }}
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+
+  return (
+    <div
+      className="rounded-full bg-black/10 flex items-center justify-center text-[10px] font-bold select-none shrink-0"
+      style={{ width: SIZE, height: SIZE }}
+    >
+      {nameInitials(name)}
+    </div>
+  );
+}
+
+// ── Load stake config from localStorage ──────────────────────────────────────
+function loadStakeConfig(): StakeConfig {
+  if (typeof window === "undefined") return DEFAULT_STAKE_CONFIG;
+  try {
+    const raw = localStorage.getItem("qp_stake_config");
+    if (raw) return { ...DEFAULT_STAKE_CONFIG, ...JSON.parse(raw) };
+  } catch {}
+  return DEFAULT_STAKE_CONFIG;
+}
 
 export default function PropsTable() {
   const [market, setMarket] = useState("player_points");
@@ -52,6 +126,7 @@ export default function PropsTable() {
   const [infoOpen, setInfoOpen] = useState(false);
   const [infoText, setInfoText] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [stakeConfig] = useState<StakeConfig>(loadStakeConfig);
 
   // filters
   const [q, setQ] = useState("");
@@ -72,7 +147,6 @@ export default function PropsTable() {
   const [rows, setRows] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
 
-  // free plan gating: always force 10
   useEffect(() => {
     if (!IS_PRO) {
       setPageSize(10);
@@ -122,30 +196,42 @@ export default function PropsTable() {
 
   const prettyRows = useMemo(
     () =>
-      rows.map((r) => ({
-        ...r,
-        marketPretty: marketLabel(String(r.market)),
-        sidePretty: (() => {
-          const sideRaw = String(r.side || "").toLowerCase();
-          const marketRaw = String(r.market || "").toLowerCase();
-          if (marketRaw === "moneyline" || marketRaw === "spread") {
-            if (sideRaw === "over") return "HOME";
-            if (sideRaw === "under") return "AWAY";
-          }
-          return String(r.side || "").toUpperCase();
-        })(),
-        bookPretty: String(r.book).toUpperCase(),
-        pNum: Number(r.p),
-        evNum: Number(r.ev),
-      })),
-    [rows]
+      rows.map((r) => {
+        const odds = coerceDecimalOdds(r);
+        const oddsNum = odds !== null ? odds : Number(r.odds);
+        const pNum = Number(r.p);
+        const stake = kellyStake(pNum, oddsNum, stakeConfig);
+        return {
+          ...r,
+          marketPretty: marketLabel(String(r.market)),
+          sidePretty: (() => {
+            const sideRaw = String(r.side || "").toLowerCase();
+            const marketRaw = String(r.market || "").toLowerCase();
+            if (marketRaw === "moneyline" || marketRaw === "spread") {
+              if (sideRaw === "over") return "HOME";
+              if (sideRaw === "under") return "AWAY";
+            }
+            return String(r.side || "").toUpperCase();
+          })(),
+          bookPretty: String(r.book).toUpperCase(),
+          pNum,
+          evNum: Number(r.ev),
+          oddsNum,
+          stake,
+        };
+      }),
+    [rows, stakeConfig]
   );
 
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   const safePage = Math.min(page, totalPages);
 
   const logBet = async (row: any) => {
-    const stakeStr = window.prompt("Stake amount?");
+    const suggestedStake = row.stake?.stake;
+    const stakeStr = window.prompt(
+      `Stake amount?${suggestedStake ? ` (Suggested: $${suggestedStake.toFixed(2)})` : ""}`,
+      suggestedStake ? suggestedStake.toFixed(2) : ""
+    );
     if (!stakeStr) return;
     const stake = Number(stakeStr);
     if (!Number.isFinite(stake) || stake <= 0) return;
@@ -179,7 +265,9 @@ export default function PropsTable() {
 
   const openInfo = async (row: any) => {
     try {
-      const res = await fetch(`/api/edge-info?id=${encodeURIComponent(row.id)}`);
+      const res = await fetch(
+        `/api/edge-info?id=${encodeURIComponent(row.id)}`
+      );
       const json = await res.json();
       setInfoText(json.explanation || "No details available.");
       setInfoOpen(true);
@@ -197,14 +285,14 @@ export default function PropsTable() {
     setMounted(true);
   }, []);
 
-
   return (
     <div className="space-y-6 relative">
       {!IS_PRO && (
         <div className="border rounded-2xl p-4 bg-black/5">
           <div className="font-semibold">Free plan</div>
           <div className="text-sm opacity-70">
-            You're viewing the top 10 filtered edges. Upgrade to Pro to see all results, larger pages, and more markets.
+            You're viewing the top 10 filtered edges. Upgrade to Pro to see all
+            results, larger pages, and more markets.
           </div>
         </div>
       )}
@@ -336,33 +424,58 @@ export default function PropsTable() {
 
       {/* Table */}
       <div className="border rounded-2xl overflow-auto">
-        <table className="w-full table-fixed border-separate border-spacing-0 text-sm min-w-[1360px]">
+        <table className="w-full table-fixed border-separate border-spacing-0 text-sm min-w-[1520px]">
           <thead>
             <tr className="bg-black/5">
-              <th className="px-4 py-3 text-left font-semibold w-[260px]">Player</th>
-              <th className="px-4 py-3 text-center font-semibold w-[120px]">Market</th>
-              <th className="px-4 py-3 text-center font-semibold w-[90px]">Side</th>
-              <th className="px-4 py-3 text-center font-semibold w-[90px]">Line</th>
-              <th className="px-4 py-3 text-center font-semibold w-[90px]">Odds</th>
-              <th className="px-4 py-3 text-center font-semibold w-[90px]">P</th>
-              <th className="px-4 py-3 text-center font-semibold w-[90px]">EV</th>
-              <th className="px-4 py-3 text-center font-semibold w-[120px]">Book</th>
-              <th className="px-4 py-3 text-center font-semibold w-[120px]">Confidence</th>
-              <th className="px-4 py-3 text-center font-semibold w-[70px]">Info</th>
-              <th className="px-4 py-3 text-center font-semibold w-[90px]">Log</th>
+              <th className="px-4 py-3 text-left font-semibold w-[280px]">
+                Player
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[120px]">
+                Market
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[80px]">
+                Side
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[80px]">
+                Line
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[80px]">
+                Odds
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[80px]">
+                P
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[80px]">
+                EV
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[100px]">
+                Stake
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[110px]">
+                Book
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[100px]">
+                Confidence
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[60px]">
+                Info
+              </th>
+              <th className="px-4 py-3 text-center font-semibold w-[80px]">
+                Log
+              </th>
             </tr>
           </thead>
 
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={11} className="p-6 text-center opacity-60">
+                <td colSpan={12} className="p-6 text-center opacity-60">
                   Loading...
                 </td>
               </tr>
             ) : prettyRows.length === 0 ? (
               <tr>
-                <td colSpan={11} className="p-6 text-center opacity-60">
+                <td colSpan={12} className="p-6 text-center opacity-60">
                   No edges found.
                 </td>
               </tr>
@@ -370,21 +483,53 @@ export default function PropsTable() {
               prettyRows.map((r) => {
                 const c = confidenceBadge(Number(r.p));
                 return (
-                  <tr key={r.id} className="border-t border-white/10 hover:bg-black/5">
-                    <td className="px-4 py-3 text-left whitespace-nowrap overflow-hidden text-ellipsis">
-                      {r.player_name}
+                  <tr
+                    key={r.id}
+                    className="border-t border-white/10 hover:bg-black/5"
+                  >
+                    <td className="px-4 py-3 text-left">
+                      <div className="flex items-center gap-2">
+                        <RowAvatar
+                          name={r.player_name}
+                          market={r.market}
+                          teamAbbr={r.team_abbr}
+                        />
+                        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                          {r.player_name}
+                        </span>
+                      </div>
                     </td>
-                    <td className="px-4 py-3 text-center whitespace-nowrap">{r.marketPretty}</td>
+                    <td className="px-4 py-3 text-center whitespace-nowrap">
+                      {r.marketPretty}
+                    </td>
                     <td className="px-4 py-3 text-center">{r.sidePretty}</td>
-                    <td className="px-4 py-3 text-center tabular-nums">{Number(r.line).toFixed(1)}</td>
-                    <td className="px-4 py-3 text-center tabular-nums">{formatDecimalOdds(r)}</td>
-                    <td className="px-4 py-3 text-center tabular-nums">{Number(r.p).toFixed(3)}</td>
-                    <td className="px-4 py-3 text-center tabular-nums font-semibold">{Number(r.ev).toFixed(3)}</td>
+                    <td className="px-4 py-3 text-center tabular-nums">
+                      {Number(r.line).toFixed(1)}
+                    </td>
+                    <td className="px-4 py-3 text-center tabular-nums">
+                      {formatDecimalOdds(r)}
+                    </td>
+                    <td className="px-4 py-3 text-center tabular-nums">
+                      {Number(r.p).toFixed(3)}
+                    </td>
+                    <td className="px-4 py-3 text-center tabular-nums font-semibold">
+                      {Number(r.ev).toFixed(3)}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="tabular-nums font-semibold">
+                        {formatStake(r.stake.stake)}
+                      </div>
+                      <div className="text-[10px] opacity-50">
+                        {formatUnits(r.stake.units)}
+                      </div>
+                    </td>
                     <td className="px-4 py-3 text-center whitespace-nowrap overflow-hidden text-ellipsis">
                       {String(r.bookPretty)}
                     </td>
                     <td className="px-4 py-3 text-center">
-                      <span className={`inline-flex items-center justify-center px-2 py-1 rounded-lg text-xs font-semibold ${c.cls}`}>
+                      <span
+                        className={`inline-flex items-center justify-center px-2 py-1 rounded-lg text-xs font-semibold ${c.cls}`}
+                      >
                         {c.text}
                       </span>
                     </td>
@@ -414,7 +559,9 @@ export default function PropsTable() {
       </div>
 
       <p className="text-xs opacity-60">
-        P = win probability from the selected Source. EV = expected profit per $1. Confidence is a simple proxy based on how far P is from 0.5.
+        P = win probability from the selected Source. EV = expected profit per
+        $1. Confidence is a simple proxy based on how far P is from 0.5. Stake =
+        recommended bet using quarter-Kelly criterion.
       </p>
       {mounted &&
         infoOpen &&
@@ -439,8 +586,12 @@ export default function PropsTable() {
               >
                 x
               </button>
-              <div className="text-base font-semibold text-white">Why this pick</div>
-              <p className="mt-4 text-sm leading-relaxed text-white/80">{infoText}</p>
+              <div className="text-base font-semibold text-white">
+                Why this pick
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-white/80">
+                {infoText}
+              </p>
             </div>
           </div>,
           document.body
